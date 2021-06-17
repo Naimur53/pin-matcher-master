@@ -34,16 +34,19 @@ function checks() {
     randomNum = Math.round(randomNum);
     const randomNumString = randomNum + "";
     if (randomNumString.length == 4) {
-        document.getElementById("random-show").value = randomNum;
+        return randomNum;
     }
     else {
         console.log(randomNum);
-        checks();
+       return checks();
     }
 }
 
 document.getElementById("generate-btn").addEventListener("click", function () {
-    checks();
+    document.getElementById("random-show").value = checks();;
+    
+    document.getElementById("input-shower").value = "";
+    document.getElementById("try").innerText =3;
 
 })
 //submit 
@@ -55,21 +58,25 @@ function toNum(id) {
 function submit() {
     const generate = toNum("random-show");
     const pin = toNum("input-shower");
-    if (generate == pin) {
+    
+    const tryString = document.getElementById("try").innerText;
+    let tryNum = parseInt(tryString);
+    if (generate == pin && tryNum>0) {
         document.getElementById("pass-right").style.display = 'block';
-        document.getElementById("pass-wrong").style.display = 'none'; 
+        document.getElementById("pass-wrong").style.display = 'none';   
     }
     else {
         document.getElementById("pass-right").style.display = 'none';
         document.getElementById("pass-wrong").style.display = 'block';
-    }
-}
 
-// function display(rightOrWrong){
-//  if(rightOrWrong = "right"){
-//      document.getElementById("pass-"+rightOrWrong).style.display = 'block';
-//  }
-//  else if(rightOrWrong = "wrong"){
-//      document.getElementById("pass-"+rightOrWrong).style.display = 'block';
-//  }
-// }
+        //try
+        if(tryNum == 0){
+            alert(" Sorry you have block try to regenerate pin "); 
+        }
+        else{
+            tryNum--; 
+            document.getElementById("try").innerText = tryNum;
+        }
+
+    }
+} 
