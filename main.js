@@ -1,8 +1,8 @@
 const allClass = document.getElementsByClassName("button");
 for (let i = 0; i < allClass.length; i++) {
     const element = allClass[i];
-    element.addEventListener("click", function () {
-        const check = this.innerText;
+    element.addEventListener("click", function (e) {
+        const check = e.target.innerText;
         let inputShower = document.getElementById("input-shower");
         if (check == "C") {
             inputShower.value = "";
@@ -38,15 +38,15 @@ function checks() {
     }
     else {
         console.log(randomNum);
-       return checks();
+        return checks();
     }
 }
 
 document.getElementById("generate-btn").addEventListener("click", function () {
     document.getElementById("random-show").value = checks();;
-    
+
     document.getElementById("input-shower").value = "";
-    document.getElementById("try").innerText =3;
+    document.getElementById("try").innerText = 3;
 
 })
 //submit 
@@ -58,25 +58,25 @@ function toNum(id) {
 function submit() {
     const generate = toNum("random-show");
     const pin = toNum("input-shower");
-    
+
     const tryString = document.getElementById("try").innerText;
     let tryNum = parseInt(tryString);
-    if (generate == pin && tryNum>0) {
+    if (generate == pin && tryNum > 0) {
         document.getElementById("pass-right").style.display = 'block';
-        document.getElementById("pass-wrong").style.display = 'none';   
+        document.getElementById("pass-wrong").style.display = 'none';
     }
     else {
         document.getElementById("pass-right").style.display = 'none';
         document.getElementById("pass-wrong").style.display = 'block';
 
         //try
-        if(tryNum == 0){
-            alert(" Sorry you have block try to regenerate pin "); 
+        if (tryNum == 0) {
+            alert(" Sorry you have block try to regenerate pin ");
         }
-        else{
-            tryNum--; 
+        else {
+            tryNum--;
             document.getElementById("try").innerText = tryNum;
         }
 
     }
-} 
+}
